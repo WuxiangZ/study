@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <title>小朱的CNCAP</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="./vue.min.js"></script>
+    <script src="./index.js" type="module"></script>
+    <link rel="icon" href="./favicon.ico">
+
+</head>
+<body>
+    
+<div id="content">
+    <div class="toptitle">AEB自动紧急制动 得分计算表</div>
+    <div>
+        <ul class="ultitle">
+            <li>车辆型号：<input type="text" class="useless"></li>
+            <li>VIN：<input type="text" class="useless"></li>
+            <li>车辆名称：<input type="text" class="useless"></li>
+        </ul>
+        <ul class="ultitle">
+            <li>生产企业：<input type="text" class="useless"></li>
+            <li>试验地点：<input type="text" class="useless"></li>
+            <li>试验日期：<input type="text" class="useless"></li>
+        </ul>
+        <ul class="ultitle">
+            <li>车辆尺寸：<input type="text" class="useless"></li>
+            <li>轴距：<input type="text" class="useless"></li>
+        </ul>
+    </div>
+    <table id="table1">
+        <div class="aebson">AEB CCR -------- CCRS</div>
+        <div class="ccrstable">AEB</div>
+        <thead>
+
+            <tr>
+
+                <th>速度 kph</th>
+                
+                <th scope="col" abbr="Starter"> 偏置率 </th>
+
+                <th scope="col" abbr="Medium"> VUT碰撞速度 </th>
+
+                <th scope="col" abbr="Business"> 分值（权重）</th>
+
+                <th scope="col" abbr="Deluxe"> 各速度点得分 </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            <tr>
+                
+                <th scope="row"> 2 0 </th>
+
+                <td> -50% </td>
+
+                <td><input type="text" class="vut_speed"  v-model="ccrs_sobj.fs"> </td>
+
+                <td> 2.00 </td>
+
+                <td> {{ccrs_score[0]}} </td>
+
+            </tr>
+
+            <tr>
+                
+                <th scope="row"> 2 0 </th>
+
+                <td> 100% </td>
+
+                <td><input type="text" class="vut_speed"  v-model="ccrs_sobj.ss"> </td>
+
+                <td> 2.00 </td>
+
+                <td> {{ccrs_score[1]}} </td>
+            </tr>
+
+            <tr>
+                
+                <th scope="row"> 3 0 </th>
+
+                <td> 50% </td>
+
+                <td><input type="text" class="vut_speed"   v-model="ccrs_sobj.ts"> </td>
+
+                <td> 2.00 </td>
+
+                <td> {{ccrs_score[2]}} </td>
+
+            </tr>
+
+            <tr>
+                
+                <th scope="row"> 3 0 </th>
+
+                <td> 100% </td>
+
+                <td><input type="text" class="vut_speed"  v-model="ccrs_sobj.forths"> </td>
+
+                <td> 2.00 </td>
+
+                <td> {{ccrs_score[3]}} </td>
+            </tr>
+
+            <tr>
+                
+                <th scope="row"> 4 0 </th>
+
+
+                <td> -50% </td>
+
+                <td><input type="text" class="vut_speed"   v-model="ccrs_sobj.fives"> </td>
+
+                <td> 3.00 </td>
+
+                <td> {{ccrs_score[4]}} </td>
+            </tr>
+
+            <tr>
+                
+                <th scope="row"> 4 0 </th>
+
+                <td> -50% </td>
+
+                <td><input type="text" class="vut_speed"  v-model="ccrs_sobj.sixs"> </td>
+
+                <td> 3.00 </td>
+
+                <td> {{ccrs_score[5]}} </td>
+            </tr>
+            <tr>
+                
+                <th scope="row"> 总得分 </th>
+
+                <td><span class="check"></span></td>
+
+                <td><span class="check"></span></td>
+
+                <td><span class="check"> 14.0 </span></td>
+
+                <td><span class="check"> {{totalccrs[1]}} </span></td>
+
+            </tr>
+            <tr>
+                
+                <th scope="row"> 得分率 </th>
+
+                <td><span class="check"></span></td>
+
+                <td><span class="check"></span></td>
+
+                <td><span class="check"></span></td>
+
+                <td><span class="check"> {{ccrsrate}} </span></td>
+
+            </tr>
+        </tbody>
+
+    </table>
+
+    <table id="table1">
+        <div class="ccrstable">FCW</div>
+        <thead>
+            <tr>
+                <th>速度 kph</th>
+                <th scope="col" abbr="Starter"> 偏置率 </th>
+                <th scope="col" abbr="Medium"> VUT碰撞速度 </th>
+                <th scope="col" abbr="Business"> 分值（权重）</th>
+                <th scope="col" abbr="Deluxe"> 各速度点得分 </th>
+                <th scope="col" abbr="Deluxe"> 报警时TTC/s </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"> 5 0 </th>
+                <td> 50% </td>
+                <td><input type="text" class="vut_speed"  v-model="fcws_sobj.fs"> </td>
+                <td> 1.00 </td>
+                <td> {{fcws_score[0]}} </td>
+                <td> 1.86 </td>
+            </tr>
+            <tr>
+                <th scope="row"> 5 0 </th>
+                <td> 100% </td>
+                <td><input type="text" class="vut_speed"  v-model="fcws_sobj.ss"> </td>
+                <td> 1.00 </td>
+                <td> {{fcws_score[1]}} </td>
+                <td> 1.96 </td>
+            </tr>
+
+            <tr>
+                <th scope="row"> 6 0 </th>
+                <td> -50% </td>
+                <td><input type="text" class="vut_speed"   v-model="fcws_sobj.ts"> </td>
+                <td> 3.00 </td>
+                <td> {{fcws_score[2]}} </td>
+                <td> 2.12 </td>
+            </tr>
+            <tr>
+                
+                <th scope="row"> 6 0 </th>
+                <td> 100% </td>
+                <td><input type="text" class="vut_speed"  v-model="fcws_sobj.forths"> </td>
+                <td> 3.00 </td>
+                <td> {{fcws_score[3]}} </td>
+                <td> 2.10 </td>
+            </tr>
+
+            <tr>
+                <th scope="row"> 7 0 </th>
+                <td> 50% </td>
+                <td><input type="text" class="vut_speed"   v-model="fcws_sobj.fives"> </td>
+                <td> 1.00 </td>
+                <td> {{fcws_score[4]}} </td>
+                <td> 2.33 </td>
+            </tr>
+
+            <tr>
+                <th scope="row"> 7 0 </th>
+                <td> 100% </td>
+                <td><input type="text" class="vut_speed"  v-model="fcws_sobj.sixs"> </td>
+                <td> 1.00 </td>
+                <td> {{fcws_score[5]}} </td>
+                <td> 2.29 </td>
+            </tr>
+            <tr>
+                <th scope="row"> 8 0 </th>
+                <td> -50% </td>
+                <td><input type="text" class="vut_speed"  v-model="fcws_sobj.sevens"> </td>
+                <td> 2.00 </td>
+                <td> {{fcws_score[6]}} </td>
+                <td> 1.90 </td>
+            </tr>
+            <tr>
+                <th scope="row"> 8 0 </th>
+                <td> 100% </td>
+                <td><input type="text" class="vut_speed"  v-model="fcws_sobj.eights"> </td>
+                <td> 2.00 </td>
+                <td> {{fcws_score[7]}} </td>
+                <td> 1.54 </td>
+            </tr>
+            <tr>
+                <th scope="row"> 总得分 </th>
+                <td><span class="check"></span></td>
+                <td><span class="check"></span></td>
+                <td><span class="check"> 14.0 </span></td>
+                <td><span class="check"> {{totalfcws[1]}} </span></td>
+            </tr>
+            <tr>
+                <th scope="row"> 得分率 </th>
+                <td><span class="check"></span></td>
+                <td><span class="check"></span></td>
+                <td><span class="check"></span></td>
+                <td><span class="check"> {{fcwsrate}} </span></td>
+            </tr>
+        </tbody>
+
+    </table>
+    <table id="table1">
+        <div class="ccrstable">CCRs</div>
+        <thead>
+            <tr>
+                <th>场景得分值&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th scope="col" abbr="Starter"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </th>
+                <th scope="col" abbr="Medium">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </th>
+                <th scope="col" abbr="Business" class=" blankth"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;场景得分 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th scope="col" abbr="Deluxe" class=" blankth">&nbsp;&nbsp;&nbsp;&nbsp; {{screenscore[1]}} &nbsp;&nbsp;&nbsp;&nbsp;</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">  </th>
+                <td></td>
+                <td></td>
+                <td class=" blankth">场景得分率 </td>
+                <td class=" blankth"> {{screenrate}} </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+
+</html>
