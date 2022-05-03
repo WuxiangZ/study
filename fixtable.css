@@ -1,0 +1,62 @@
+.FixTable{
+    height: 65%;;
+    width: 95%;
+    /* border: 1px solid beige; */
+    font-size: 14px;
+    margin-top: 10px;
+}
+.FixCap{
+    margin: auto 10px;
+    font-size: 20px;
+    font-style:normal;
+}
+.FixTable th{
+    font-style:normal;
+}
+
+.FixTable td,th{
+    font-weight: bold;
+    height: 16px;
+    padding: 2px;
+    text-align:center;
+    border:none;
+    border-left: 2px solid rgba(0, 0, 0, 0.68);
+    border-top: 2px solid rgba(0, 0, 0, 0.699);
+}
+
+.outValue{
+    position: fixed;
+    top: 200px;
+    z-index: -1;
+    color: red;
+    right: 360px;
+    font-style: normal;
+    display: block!important;
+}
+
+.fixuseless{
+    height: 25%;;
+    width: 95%;
+    /* border: 1px solid beige; */
+    font-size: 14px;
+}
+
+.fixuseless td,th{
+    font-weight: bold;
+    height: 16px;
+    padding: 2px;
+    text-align:center;
+    border:none;
+    border-right: 2px solid rgba(0, 0, 0, 0.68);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.699);
+}
+
+.unwrite{
+    color: red;
+}
+.port1{
+    margin-bottom: 10px;
+    float: right;
+    right: 0;
+    color: aqua;
+}
